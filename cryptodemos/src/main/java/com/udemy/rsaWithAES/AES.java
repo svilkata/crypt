@@ -1,4 +1,4 @@
-package symmetric.aes;
+package com.udemy.rsaWithAES;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
@@ -16,23 +16,19 @@ import java.util.Base64;
 
 public class AES {
     private SecretKey secretKey;
-    private SecureRandom secureRandom;
     private Cipher encryptCipher;
     private Cipher decryptCipher;
     private IvParameterSpec ivParams;
 
-    public AES() {
-        secureRandom = new SecureRandom();
+    // we have to use same initialization vector both for encryption and for decryption !!!
+    public AES(SecretKey secretKey, byte[] initializationVector) {
         try {
-            secretKey = KeyGenerator.getInstance("AES").generateKey();
-            encryptCipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
-            decryptCipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
-
-            byte[] ivBytes = new byte[encryptCipher.getBlockSize()];
-            secureRandom.nextBytes(ivBytes);
-            ivParams = new IvParameterSpec(ivBytes);
-            encryptCipher.init(Cipher.ENCRYPT_MODE, secretKey, ivParams);
-            decryptCipher.init(Cipher.DECRYPT_MODE, secretKey, ivParams);
+            this.secretKey = secretKey;
+            this.encryptCipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
+            this.decryptCipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
+            this.ivParams = new IvParameterSpec(initializationVector);
+            this.encryptCipher.init(Cipher.ENCRYPT_MODE, secretKey, ivParams);
+            this.decryptCipher.init(Cipher.DECRYPT_MODE, secretKey, ivParams);
         } catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException |
                  InvalidAlgorithmParameterException e) {
             e.printStackTrace();
@@ -62,7 +58,6 @@ public class AES {
         } catch (IllegalBlockSizeException | BadPaddingException | UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-
 
         return null;
     }

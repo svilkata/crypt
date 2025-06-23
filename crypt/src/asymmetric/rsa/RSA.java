@@ -1,18 +1,17 @@
 package asymmetric.rsa;
 
-import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.security.SecureRandom;
 
 public class RSA {
 
-    // this is the 'e' parameter part of the publicKey - the recipient's public key to be encrypted with
+    // this is the 'e' parameter part of the publicKey (the recipient's public key to be encrypted with) - the public Exponent
     private BigInteger publicKey;
 
-    // this is the 'd' parameter part of the privateKey - the recipient's private key for decryption
+    // this is the 'd' parameter part of the privateKey (the recipient's private key for decryption) - the private Exponent
     private BigInteger privateKey;
 
-    // this is n=p*q, i.e. n is the moduloN
+    // this is n=p*q, i.e. n is the modulosN
     private BigInteger n;
 
     private SecureRandom random; //random generator

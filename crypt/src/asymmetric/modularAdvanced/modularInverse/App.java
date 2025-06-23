@@ -1,7 +1,6 @@
 package asymmetric.modularAdvanced.modularInverse;
 
 
-
 public class App {
     public static void main(String[] args) {
 
