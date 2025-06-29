@@ -11,7 +11,7 @@ public class Point {
 
     }
 
-    Point (BigDecimal x, BigDecimal y) {
+    public Point (BigDecimal x, BigDecimal y) {
         this.x = x;
         this.y = y;
     }
